@@ -41,7 +41,12 @@
     <rule ref="MySource.PHP.EvalObjectFactory"/>
     <rule ref="MySource.PHP.GetRequestData"/>
     <rule ref="PEAR.Classes.ClassDeclaration"/>
-    <rule ref="PEAR.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment.Missing"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingParamName"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
+    <rule ref="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingReturn"/>
     <rule ref="PEAR.Commenting.InlineComment"/>
     <rule ref="PEAR.ControlStructures.ControlSignature"/>
     <rule ref="PEAR.ControlStructures.MultiLineCondition"/>
