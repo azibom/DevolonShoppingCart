@@ -40,7 +40,7 @@ class Supermarket
             ];
 
             if ($this->isProductWithSpecialPrice($product)) {
-                $data['specialOffer']        = array_slice($product, 2);
+                $data['specialOffer']         = array_slice($product, 2);
                 $this->products[$productName] = $this->productFactory->getInstance(ProductFactory::PRODUCT_WITH_SPECIAL_PRICE, $data);
             } else {
                 $this->products[$productName] = $this->productFactory->getInstance(ProductFactory::PRODUCT, $data);
