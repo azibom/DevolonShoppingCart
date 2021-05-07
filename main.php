@@ -2,16 +2,18 @@
 require './vendor/autoload.php';
 
 use Devolon\ShoppingCart\Input\CliInput;
+use Devolon\ShoppingCart\Output\CliOutput;
 use Devolon\ShoppingCart\Supermarket\Supermarket;
 use Devolon\ShoppingCart\Factories\ProductFactory;
 
-$inputer      = new CliInput;
-$productsData = $inputer->getProducts();
-$order        = $inputer->getOrder();
+$input        = new CliInput;
+$productsData = $input->getProducts();
+$order        = $input->getOrder();
 
 $productFactory = new ProductFactory;
 $supermarket    = new Supermarket($productFactory);
 $supermarket->setProducts($productsData);
 $supermarket->setOrder($order);
 
-echo $supermarket->calculateTotalPrice() . PHP_EOL;
+$output = new CliOutput;
+$output->print($supermarket->calculateTotalPrice());
