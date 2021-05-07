@@ -2,7 +2,7 @@
 
 namespace Devolon\ShoppingCart\Product;
 
-use Devolon\ShoppingCart\Contrancts\ProductInterface;
+use Devolon\ShoppingCart\Contracts\ProductInterface;
 
 class ProductWithSpecialPrice extends Product implements ProductInterface
 {

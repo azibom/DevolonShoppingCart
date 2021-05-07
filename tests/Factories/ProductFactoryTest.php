@@ -36,7 +36,7 @@ class ProductFactoryTest extends TestCase
         $data = [
             'name'  => 'B',
             'price' => 10,
-            'specialPrices' => [
+            'specialOffer' => [
                 '3-29',
                 '6-55',
             ]

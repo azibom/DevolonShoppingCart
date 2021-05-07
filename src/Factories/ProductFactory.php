@@ -6,28 +6,34 @@ use Exception;
 use Devolon\ShoppingCart\Product\Product;
 use Devolon\ShoppingCart\Product\ProductWithSpecialPrice;
 
-class ProductFactory {
-    const PRODUCT = "product";
+class ProductFactory
+{
+    const PRODUCT                    = "product";
     const PRODUCT_WITH_SPECIAL_PRICE = "productWithSpecialPrice";
 
-    public function getInstance(string $productName, $data) {
-        switch ($productName) {
-            case self::PRODUCT:
-                $product = new Product($data['name'], $data['price']);
-            break;
-            case self::PRODUCT_WITH_SPECIAL_PRICE:
-                $product = new ProductWithSpecialPrice($data['name'], $data['price']);
-
-                if (isset($data['specialPrices'])) {
-                    foreach ($data['specialPrices'] as $specialPrice) {
-                        $specialPrice = explode('-', $specialPrice);
-                        $product->setSpecialPrice((int)$specialPrice[0], (int)$specialPrice[1]);
-                    }
+    /**
+     * getInstance function
+     *
+     * @param string $productName
+     * @param array  $data
+     *
+     * @return Product
+     */
+    public function getInstance(string $productName, array $data) {
+        if ($productName === self::PRODUCT) {
+            $product = new Product($data['name'], $data['price']);
+        } elseif ($productName === self::PRODUCT_WITH_SPECIAL_PRICE) {
+            $product = new ProductWithSpecialPrice($data['name'], $data['price']);
+            if (isset($data['specialOffer'])) {
+                foreach ($data['specialOffer'] as $specialOffer) {
+                    $specialOffer = explode('-', $specialOffer);
+                    $specialOfferCount = (int) $specialOffer[0];
+                    $specialOfferPrice = (int) $specialOffer[1];
+                    $product->setSpecialPrice($specialOfferCount, $specialOfferPrice);
                 }
-            break;
-            default:
-                throw new Exception("$productName Product Type Not Found.");
-            break;    
+            }
+        } else {
+            throw new Exception("$productName Product Type Not Found.");
         }
 
         return $product;
