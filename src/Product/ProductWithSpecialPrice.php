@@ -21,9 +21,9 @@ class ProductWithSpecialPrice extends Product implements ProductInterface{
                 $price += ((int)($count / $productCount) * $productPrice);
                 $count = $count % $productCount;
             }
-
-            $price += $count * $this->price;
         }
+
+        $price += $count * $this->price;
 
         return $price;
     }
