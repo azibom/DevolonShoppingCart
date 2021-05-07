@@ -24,9 +24,9 @@ class Supermarket {
 
             if (count($product) > 2) {
                 $data['specialPrices'] = array_slice($product, 2);
-                $this->products[$product[0]] = $this->productFactory->getInstance('productWithSpecialPrice', $data);
+                $this->products[$product[0]] = $this->productFactory->getInstance(ProductFactory::PRODUCT_WITH_SPECIAL_PRICE, $data);
             } else {
-                $this->products[$product[0]] = $this->productFactory->getInstance('product', $data);
+                $this->products[$product[0]] = $this->productFactory->getInstance(ProductFactory::PRODUCT, $data);
             }
         }
     }
