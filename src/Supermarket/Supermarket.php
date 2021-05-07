@@ -31,9 +31,19 @@ class Supermarket {
         }
     }
 
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
     public function setOrder(array $productNames)
     {
         $this->order = array_count_values($productNames);
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
     }
 
     public function calculateTotalPrice()
