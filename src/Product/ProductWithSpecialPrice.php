@@ -4,22 +4,36 @@ namespace Devolon\ShoppingCart\Product;
 
 use Devolon\ShoppingCart\Contrancts\ProductInterface;
 
-class ProductWithSpecialPrice extends Product implements ProductInterface{
+class ProductWithSpecialPrice extends Product implements ProductInterface
+{
     private $specialPrices = [];
 
-    public function setSpecialPrice($count, $price)
-    {
+    /**
+     * setSpecialPrice function
+     *
+     * @param integer $count
+     * @param integer $price
+     *
+     * @return void
+     */
+    public function setSpecialPrice(int $count, int $price) {
         $this->specialPrices[$count] = $price;
     }
 
-    public function calculatePrice(int $count)
-    {
+    /**
+     * calculatePrice function
+     *
+     * @param integer $count
+     *
+     * @return int
+     */
+    public function calculatePrice(int $count) {
         $price = 0;
         krsort($this->specialPrices);
         foreach ($this->specialPrices as $productCount => $productPrice) {
             if ($count >= $productCount) {
-                $price += ((int)($count / $productCount) * $productPrice);
-                $count = $count % $productCount;
+                $price += ((int) ($count / $productCount) * $productPrice);
+                $count  = $count % $productCount;
             }
         }
 
