@@ -26,7 +26,7 @@ class ProductFactory
             $product = new ProductWithSpecialPrice($data['name'], $data['price']);
             if (isset($data['specialOffer'])) {
                 foreach ($data['specialOffer'] as $specialOffer) {
-                    $specialOffer = explode('-', $specialOffer);
+                    $specialOffer      = explode('-', $specialOffer);
                     $specialOfferCount = (int) $specialOffer[0];
                     $specialOfferPrice = (int) $specialOffer[1];
                     $product->setSpecialPrice($specialOfferCount, $specialOfferPrice);
