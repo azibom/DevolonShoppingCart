@@ -2,28 +2,32 @@
 
 namespace Devolon\ShoppingCart\Supermarket;
 
-use Devolon\ShoppingCart\Product\Product;
-use Devolon\ShoppingCart\Product\ProductWithSpecialPrice;
+use Devolon\ShoppingCart\Factories\ProductFactory;
 
 class Supermarket {
     private $order;
     private $products = [];
+    private $productFactory;
+
+    public function __construct(ProductFactory $productFactory)
+    {
+        $this->productFactory = $productFactory;
+    }
 
     public function setProducts(array $products)
     {
         foreach ($products as $product) {
+            $data = [
+                'name'  => $product[0],
+                'price' => $product[1],
+            ];
+
             if (count($product) > 2) {
-                $productObject = new ProductWithSpecialPrice($product[0], $product[1]);
-                for ($i=2; $i < count($product); $i++) { 
-                    $specialOffer = explode('-', $product[$i]);
-                    $productObject->setSpecialPrice((int)$specialOffer[0], (int)$specialOffer[1]);
-                }
-
-                $this->products[$product[0]] = $productObject;
+                $data['specialPrices'] = array_slice($product, 2);
+                $this->products[$product[0]] = $this->productFactory->getInstance('productWithSpecialPrice', $data);
             } else {
-                $this->products[$product[0]] = new Product($product[0], $product[1]);
+                $this->products[$product[0]] = $this->productFactory->getInstance('product', $data);
             }
-
         }
     }
 

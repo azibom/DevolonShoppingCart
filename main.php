@@ -3,11 +3,14 @@ require './vendor/autoload.php';
 
 use Devolon\ShoppingCart\Input\CliInput;
 use Devolon\ShoppingCart\Supermarket\Supermarket;
+use Devolon\ShoppingCart\Factories\ProductFactory;
 
-$inputer = new CliInput;
+$inputer      = new CliInput;
 $productsData = $inputer->getProducts();
 $order        = $inputer->getOrder();
-$supermarket = new Supermarket;
+
+$productFactory = new ProductFactory;
+$supermarket    = new Supermarket($productFactory);
 $supermarket->setProducts($productsData);
 $supermarket->setOrder($order);
 
