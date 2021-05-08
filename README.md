@@ -57,12 +57,12 @@ Our project code are in the `src` directory so lets check files in this director
 #### 1.Contracts
 We use `Contracts` directory and define our `Interfaces` in it
 #### 2.Factories
-We use `Factories` directory and difine our factory method implementation on it (I define product factory method for creating diffrent type of the product)
+We use `Factories` directory and define our factory method implementation on it (I define product factory method for creating diffrent type of the product)
 #### 3.Input And Output
 We use `Input And Output` for get the data and show them to the client. <br>
 I seprate the Input and Output from the code logic and we can for example just define a new Input class and implement the `InputInterface` and use it in our app  
 #### 4.Product
-We use `product` class to define our products and also use `ProductWithSpecialPrice` class to difine our product with special price (that is child of `product` and that is a adapter class and have one method to get the special price and overwrite the `calculatePrice` too)
+We use `product` class to define our products and also use `ProductWithSpecialPrice` class to define our product with special price (that is child of `product` and that is a adapter class and have one method to get the special price and overwrite the `calculatePrice` too)
 #### 5.Supermarket
 We set products and order in `Supermarket` class and also it get the total price from our products and gathers together and that is the core of our project
 
