@@ -236,7 +236,7 @@ make codeStyleChecker
 ```
 
 ### About me
-Because this is a task for hiring, I also write a little about myself :) <br> <br>
+Because this is a task for hiring, I also write a little about myself :) <br>
 
 A Happy Software Engineer who has skills in Python, PHP, js and Machine Learning. Mohammad has been trying hard to be better than yesterday everyday. <br>
 
