@@ -108,9 +108,142 @@ B 20 3-59
 A A A B B B
 ```
 It means you have two products and the price of `A` is `10` and the price of `B` is `20` and if you buy `3` numbers of `B` you can pay `59` instead of `60`. <br>
-And the end line also show you the order, in this case you buy `3` of `B` and `3` of `A`
+And the end line also show you the order, in this case you buy `3` of `B` and `3` of `A`. <br>
+(If you want for example read the input from the file you can just make the new Input class and implement it from InputInterface and just use it easily, because that part is completly separated from the other part of the code, also you can do it with output)
 #### Output
 ```
 89
 ```
 And your output will be the total price
+
+### Code Quality
+
+#### Code styles
+I use `phpcs` for check the style of the code and I also use my rules which is in `phpcs.xml` and you can check it with this command 
+```
+docker run -it --rm php-cli-img vendor/bin/phpcs --standard=./phpcs.xml
+```
+
+#### Unit tests
+I use `phpunit` for writing unit tests and my code coverage is 100% right now
+```
+PHPUnit 8.5.15 by Sebastian Bergmann and contributors.
+
+.........                                                           9 / 9 (100%)
+
+Time: 134 ms, Memory: 6.00 MB
+
+OK (9 tests, 14 assertions)
+
+
+Code Coverage Report:     
+  2021-05-08 10:22:59     
+                          
+ Summary:                 
+  Classes: 100.00% (4/4)  
+  Methods: 100.00% (12/12)
+  Lines:   100.00% (47/47)
+
+\Devolon\ShoppingCart\Factories::Devolon\ShoppingCart\Factories\ProductFactory
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% ( 12/ 12)
+\Devolon\ShoppingCart\Product::Devolon\ShoppingCart\Product\Product
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  4/  4)
+\Devolon\ShoppingCart\Product::Devolon\ShoppingCart\Product\ProductWithSpecialPrice
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% ( 10/ 10)
+\Devolon\ShoppingCart\Supermarket::Devolon\ShoppingCart\Supermarket\Supermarket
+  Methods: 100.00% ( 7/ 7)   Lines: 100.00% ( 21/ 21)
+```
+And you can run it with this command
+```
+docker run -it --rm php-cli-img vendor/bin/phpunit
+```
+
+#### Feature tests
+I use behat for writing the feature test and I define some scenarios and test the all project functionality in it <br> My scenarios are like this
+```
+Scenario: Buy Products And ProductWithSpecialPrices
+    Given there is one product with name A and cost 10
+    Given there is one special price on product A and if you buy 3 of them you should pay 25
+    Given there is one product with name B and cost 20
+    And  our order is like this AABAA
+    And  set products in supermarket
+    Then Our total cost should be 55
+```
+And you can run these tests with this command
+```
+docker run -it --rm php-cli-img vendor/bin/behat
+```
+output
+```
+Feature: ShoppingCart
+    In order to buy some products and calculate the price of them
+    And I need to first define some products
+    And I need to create an order
+    Then I can get the total price
+
+  Scenario: Buy Products                               
+    Given there is one product with name A and cost 10 
+    Given there is one product with name B and cost 20 
+    And our order is like this ABABAB                  
+    And set products in supermarket                    
+    Then Our total cost should be 90                   
+
+  Scenario: Buy ProductWithSpecialPrices                                                     
+    Given there is one product with name A and cost 10                                       
+    Given there is one product with name B and cost 20                                       
+    Given there is one special price on product A and if you buy 3 of them you should pay 29 
+    Given there is one special price on product A and if you buy 6 of them you should pay 55 
+    Given there is one special price on product B and if you buy 3 of them you should pay 58 
+    And our order is like this AAAAAAAAAABBBB                                                
+    And set products in supermarket                                                          
+    Then Our total cost should be 172                                                        
+
+  Scenario: Buy Products And ProductWithSpecialPrices                                        
+    Given there is one product with name A and cost 10                                       
+    Given there is one special price on product A and if you buy 3 of them you should pay 25 
+    Given there is one product with name B and cost 20                                       
+    And our order is like this AABAA                                                         
+    And set products in supermarket                                                          
+    Then Our total cost should be 55                                                         
+
+3 scenarios (3 passed)
+19 steps (19 passed)
+0m0.04s (10.26Mb)
+```
+
+### use Makefile
+I also define a Makefile for myself to make life easier and that is like this
+```
+setup:
+	docker build -t php-cli-img .
+run:
+	docker run -it --rm php-cli-img
+unitTest:
+	docker run -it --rm php-cli-img vendor/bin/phpunit
+behavioralTest:		
+	docker run -it --rm php-cli-img vendor/bin/behat
+codeStyleChecker:		
+	docker run -it --rm php-cli-img vendor/bin/phpcs --standard=./phpcs.xml
+```
+And if you want you can use it for example run the project like this
+```
+make setup
+make run
+```
+Or check the style just with this command
+```
+make codeStyleChecker
+```
+
+### About me
+Because this is a task for hiring, I also write a little about myself :) <br> <br>
+
+A Happy Software Engineer who has skills in Python, PHP, js and Machine Learning. Mohammad has been trying hard to be better than yesterday everyday. <br>
+
+Linkedin : https://www.linkedin.com/in/azibom/ <br>
+Dev.To : https://dev.to/azibom <br>
+Github : https://github.com/azibom <br>
+Stackoverflow : https://stackoverflow.com/users/13060981/azibom <br>
+Kaggle : https://www.kaggle.com/moresha <br>
+
+
