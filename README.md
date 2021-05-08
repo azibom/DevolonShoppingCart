@@ -116,7 +116,7 @@ And the end line also show you the order, in this case you buy `3` of `B` and `3
 ```
 And your output will be the total price
 
-#### multi offers
+#### Multi offers
 you can also define multi special offers and the code support it <br>
 you should define it like this
 ```
